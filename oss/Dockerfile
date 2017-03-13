@@ -53,6 +53,7 @@ RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/fal
 
 VOLUME ${SONATYPE_WORK}
 
+ENV PORT 80
 EXPOSE ${PORT}
 WORKDIR /opt/sonatype/nexus
 USER nexus

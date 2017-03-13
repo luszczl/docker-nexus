@@ -53,7 +53,7 @@ RUN useradd -r -u 200 -m -c "nexus role account" -d ${SONATYPE_WORK} -s /bin/fal
 
 VOLUME ${SONATYPE_WORK}
 
-EXPOSE 8081
+EXPOSE ${PORT}
 WORKDIR /opt/sonatype/nexus
 USER nexus
 ENV CONTEXT_PATH /nexus
@@ -63,6 +63,7 @@ ENV JAVA_OPTS -server -Djava.net.preferIPv4Stack=true
 ENV LAUNCHER_CONF ./conf/jetty.xml ./conf/jetty-requestlog.xml
 CMD ${JAVA_HOME}/bin/java \
   -Dnexus-work=${SONATYPE_WORK} -Dnexus-webapp-context-path=${CONTEXT_PATH} \
+  -Dapplication-port=${PORT} \
   -Xms${MIN_HEAP} -Xmx${MAX_HEAP} \
   -cp 'conf/:lib/*' \
   ${JAVA_OPTS} \
